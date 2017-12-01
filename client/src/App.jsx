@@ -164,6 +164,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.startDate)
     return (
       <div className="App">
         {this.state.isLoggedIn ? (
@@ -200,6 +201,7 @@ class App extends React.Component {
           handleNewAddress={this.handleNewAddress}
           createEvent={this.createEvent}
           getTrip={this.getTrip}
+          startDate={this.state.startDate}
         />
         <Search
           numberOfDays={this.state.numberOfDays}
