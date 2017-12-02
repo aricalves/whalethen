@@ -9,7 +9,7 @@ const Calendar = (props) => {
   const trip = props.start.split('-');
   const tripStart = new Date(trip[0], Number(trip[1] - 1), trip[2]);
   const tripEnd = new Date(trip[0], Number(trip[1] - 1), Number(trip[2]) + props.events.length);
-  const myTrip = [
+  const timeline = [
     {
       title: props.name,
       start: tripStart,
@@ -19,15 +19,11 @@ const Calendar = (props) => {
   return (
     <div className="container calendar">
       <Cal
-        events={myTrip}
+        events={timeline}
         toolbar={false}
       />
     </div>
   );
-};
-
-Calendar.propTypes = {
-
 };
 
 Calendar.propTypes = {
@@ -37,11 +33,3 @@ Calendar.propTypes = {
 };
 
 export default Calendar;
-
-/*
-    <div className="calendar">
-      <h1>{setDate()}</h1>
-      <div>index: {props.i}</div>
-    </div>
-
-*/

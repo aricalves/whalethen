@@ -17,7 +17,7 @@ const Timeline = (props) => {
     startDate,
     calendar,
   } = props;
-  
+
   const displayView = () => {
     if (calendar) {
       return <Calendar events={timelineData} name={timelineName} start={startDate} />;
@@ -38,11 +38,11 @@ const Timeline = (props) => {
       </div>);
   };
 
-  const view = displayView();
+  const timelineView = displayView();
 
   return (
     <div className="container timeline">
-      {view}
+      {timelineView}
     </div>
   );
 };
