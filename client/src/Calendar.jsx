@@ -6,11 +6,15 @@ import moment from 'moment';
 Cal.setLocalizer(Cal.momentLocalizer(moment));
 
 const Calendar = (props) => {
-  console.log(props);
+  const st = props.start.split('-');
+  const date = new Date(st[0], Number(st[1] - 1), st[2]);
+  console.log(st, date)
   return (
-    <div className="calendar">
-      <Cal events={props.events[0].events} />
-    </div>
+    <Cal
+      className="container timeline"
+      events={props.events}
+      startAccessor={date}
+    />
   );
 };
 
@@ -20,6 +24,7 @@ Calendar.propTypes = {
 
 Calendar.propTypes = {
   events: propTypes.instanceOf(Object).isRequired,
+  start: propTypes.string.isRequired,
 };
 
 export default Calendar;
