@@ -9,10 +9,9 @@ const Calendar = (props) => {
   };
 
   return (
-    <div>
-      <h1>Hello World</h1>
-      <div>i: {props.i}</div>
-      <div>date: {setDate()}</div>
+    <div className="calendar">
+      <h1>{setDate()}</h1>
+      <div>index: {props.i}</div>
     </div>
   );
 };
