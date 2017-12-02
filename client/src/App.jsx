@@ -26,6 +26,7 @@ class App extends React.Component {
       newEvent: '',
       newEventAddress: '',
       today: '',
+      calendar: false,
     };
 
     this.checkAuth = this.checkAuth.bind(this);
@@ -35,11 +36,12 @@ class App extends React.Component {
     this.getTrip = this.getTrip.bind(this);
     this.handleID = this.handleID.bind(this);
     this.handleName = this.handleName.bind(this);
-    this.onLookupEnter = this.onLookupEnter.bind(this);
+    // this.onLookupEnter = this.onLookupEnter.bind(this);
     this.onCreateEnter = this.onCreateEnter.bind(this);
     this.handleNewEvent = this.handleNewEvent.bind(this);
     this.handleNewAddress = this.handleNewAddress.bind(this);
     this.createEvent = this.createEvent.bind(this);
+    this.showCalendar = this.showCalendar.bind(this);
   }
 
   componentDidMount() {
@@ -84,11 +86,11 @@ class App extends React.Component {
     }
   }
 
-  onLookupEnter(event) {
-    if (event.key === 'Enter') {
-      this.getTrip();
-    }
-  }
+  // onLookupEnter(event) {
+  //   if (event.key === 'Enter') {
+  //     this.getTrip();
+  //   }
+  // }
 
   setDate() {
     let today = moment().format('L').split('/');
@@ -154,6 +156,12 @@ class App extends React.Component {
       .catch(err => console.error('add event error: ', err));
   }
 
+  showCalendar() {
+    this.setState({
+      calendar: !this.state.calendar,
+    });
+  }
+
   createEvent(day) {
     const eventObj = {
       name: this.state.newEvent,
@@ -164,7 +172,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.startDate)
+    const timelineView = this.state.calendar ? 'Day to Day' : 'Calendar';
     return (
       <div className="App">
         {this.state.isLoggedIn ? (
@@ -191,6 +199,7 @@ class App extends React.Component {
             startDate={this.state.startDate}
           />
           <button className="scheduleSubmit" onClick={() => this.onSubmit()}>New Schedule</button>
+          {this.state.timelineId && <button className="scheduleSubmit" onClick={() => this.showCalendar()}>{timelineView}</button>}
         </div>
         <Timeline
           timelineData={this.state.timelineData}
@@ -202,6 +211,7 @@ class App extends React.Component {
           createEvent={this.createEvent}
           getTrip={this.getTrip}
           startDate={this.state.startDate}
+          calendar={this.state.calendar}
         />
         <Search
           numberOfDays={this.state.numberOfDays}

@@ -14,25 +14,22 @@ const Timeline = (props) => {
     handleNewAddress,
     createEvent,
     getTrip,
+    startDate,
+    calendar,
   } = props;
+
+  const displayView = () => {
+    if (calendar) {
+      return _.map(timelineData, (day, i) => (<CalendarView key={i} i={i} day={day} start={startDate} />));
+    }
+    return _.map(timelineData, (day, i) => (<DayView timelineId={timelineId} day={day} key={i} onCreateEnter={onCreateEnter} handleNewEvent={handleNewEvent} handleNewAddress={handleNewAddress} createEvent={createEvent} getTrip={getTrip} />));
+  };
 
   return (
     <div className="container timeline">
       <div>{timelineName}</div>
       <div className="container day">
-      <CalendarView />
-        {_.map(timelineData, (day, index) => (
-          <DayView
-            timelineId={timelineId}
-            day={day}
-            key={index}
-            onCreateEnter={onCreateEnter}
-            handleNewEvent={handleNewEvent}
-            handleNewAddress={handleNewAddress}
-            createEvent={createEvent}
-            getTrip={getTrip}
-          />
-        ))}
+        {displayView()}
       </div>
     </div>
   );
@@ -41,6 +38,14 @@ const Timeline = (props) => {
 Timeline.propTypes = {
   timelineData: propTypes.instanceOf(Array).isRequired,
   timelineId: propTypes.string.isRequired,
+  timelineName: propTypes.string,
+  startDate: propTypes.string.isRequired,
+  onCreateEnter: propTypes.func.isRequired,
+  handleNewEvent: propTypes.func.isRequired,
+  handleNewAddress: propTypes.func.isRequired,
+  createEvent: propTypes.func.isRequired,
+  getTrip: propTypes.func.isRequired,
+  calendar: propTypes.bool.isRequired,
 };
 
 export default Timeline;
