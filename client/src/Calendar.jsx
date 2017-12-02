@@ -6,15 +6,23 @@ import moment from 'moment';
 Cal.setLocalizer(Cal.momentLocalizer(moment));
 
 const Calendar = (props) => {
-  const st = props.start.split('-');
-  const date = new Date(st[0], Number(st[1] - 1), st[2]);
-  console.log(st, date)
+  const trip = props.start.split('-');
+  const tripStart = new Date(trip[0], Number(trip[1] - 1), trip[2]);
+  const tripEnd = new Date(trip[0], Number(trip[1] - 1), Number(trip[2]) + props.events.length);
+  const myTrip = [
+    {
+      title: props.name,
+      start: tripStart,
+      end: tripEnd,
+    },
+  ];
   return (
-    <Cal
-      className="container timeline"
-      events={props.events}
-      startAccessor={date}
-    />
+    <div className="container calendar">
+      <Cal
+        events={myTrip}
+        toolbar={false}
+      />
+    </div>
   );
 };
 
@@ -25,6 +33,7 @@ Calendar.propTypes = {
 Calendar.propTypes = {
   events: propTypes.instanceOf(Object).isRequired,
   start: propTypes.string.isRequired,
+  name: propTypes.string.isRequired,
 };
 
 export default Calendar;

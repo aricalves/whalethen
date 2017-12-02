@@ -86,11 +86,11 @@ class App extends React.Component {
     }
   }
 
-  // onLookupEnter(event) {
-  //   if (event.key === 'Enter') {
-  //     this.getTrip();
-  //   }
-  // }
+  onLookupEnter(event) {
+    if (event.key === 'Enter') {
+      this.getTrip();
+    }
+  }
 
   setDate() {
     let today = moment().format('L').split('/');
@@ -107,7 +107,6 @@ class App extends React.Component {
           timelineData: data,
           numberOfDays: data.length,
           timelineId: data[0].timelineId,
-          timelineName: data[0].timelineName,
         });
       })
       .catch(err => console.error(err));
